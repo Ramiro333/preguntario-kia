@@ -28,7 +28,7 @@ let pregunta27 = "cuales son las medidas politicas";
 let pregunta28 = "q significa outsourcing";
 
 const CONTAINERPREGUNTA = document.querySelector("#espacioPregunta");
-const boton = document.querySelector(".comienzo")
+const boton = document.querySelector(".button-19")
 
 function getEleccionRandom(){
     const GETRANDOM = Math.floor(Math.random() *28);
