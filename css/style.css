@@ -5,7 +5,6 @@
     box-sizing: border-box;
     font-family: "Ubuntu Sans Mono", monospace;
     font-optical-sizing: auto;
-    font-weight: <weight>;
     font-style: normal;
 }
 body{
@@ -30,11 +29,9 @@ body{
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin-bottom: ;
 }
 .container2{
     display: flex;
-    height: 50%;
     width: 100%;
     justify-content: center;
     align-items: center;
@@ -49,7 +46,7 @@ body{
     justify-content: center;
 }
 #espacioPregunta {
-    font-size: 30px ;
+    font-size: 20px ;
     text-align: center;
 }
 
