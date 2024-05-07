@@ -142,3 +142,15 @@ body{
         font-size: 20px;
     }
 }
+
+.contenedor-conjunto{
+    width: 70%;
+    height: 60%;
+    background-color: #43a4ff;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
