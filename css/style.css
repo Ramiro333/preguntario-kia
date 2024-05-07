@@ -22,6 +22,12 @@ body{
     border-radius: 5px;
     background-color: rgb(125, 134, 255);
 }
+.segundo{
+    margin-top: 50px;
+    height: 130px;
+    align-items: center;
+    justify-content: center;
+}
 .container{
     display: flex;
     height: 30%;
