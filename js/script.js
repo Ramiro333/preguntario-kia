@@ -1,65 +1,69 @@
-const PREGUNTAS = [];
-const CONTAINERPREGUNTA = document.querySelector("#espacioPregunta");
 const BOTON = document.querySelector(".button-19")
-
-// conjunto de preguntas
+const CONTAINERPREGUNTA = document.querySelector("#espacioPregunta")
 const botonUsar = document.querySelector(".boton-usar");
-function crearConjuntoPreguntas() {
-    let pregunta1 = "Cuales son los roles interpersonales";
-    let pregunta2 = "Nombrar dos ejemplos de roles decisionales";
-    let pregunta3 = "Cuales son los tipos de habilides";
-    let pregunta4 = "Cuales son los niveles gerenciales organizacionales";
-    let pregunta5 = "Nombrar a quienes se los denomina gerentes de nivel institucional";
-    let pregunta6 = "Nombrar las variantes q estudia el entorno o ambiente global";
-    let pregunta7 = "Nombrar las formas de internacionalizar a una organización";
-    let pregunta8 = "Habilidad q predomina en el nivel operativo :";
-    let pregunta9 = "Competencias del administrador";
-    let pregunta10 = "Proceso del administrador defini cada uno";
-    let pregunta11 = "Nombra q hacen los diferentes generentes de los niveles organizacionales";
-    let pregunta12 = "Como se evalua el desempeño de un administrador";
-    let pregunta13 = "Características de una organizacion";
-    let pregunta14 = "Diferencias de objetivos organizacionales y objetivos individuales";
-    let pregunta15 = "Quales son los paremetros del sistema nombralos y definilos";
-    let pregunta16 = "Que es homeostasis";
-    let pregunta17 = "Tipos de retrolimentacion";
-    let pregunta18 = "Cuantas propiedades del sistema hay definilas";
-    let pregunta19 = "Como se clasifican los sistemas segun su constitucion y segun su naturaleza";
-    let pregunta20 = "Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica";
-    let pregunta21 = "Como se clasifica la org por los sectores de actividad nombrarlos y definirlos";
-    let pregunta22 = "El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)";
-    let pregunta23 = "Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno";
-    let pregunta24 = "Aspectos formales e informales q son";
-    let pregunta25 = "Cuales son los aspectos de la cultura";
-    let pregunta26 = "Variables q se analizan dentro del riesgo politico";
-    let pregunta27 = "Cuales son las medidas politicas";
-    let pregunta28 = "Que significa outsourcing";
-    PREGUNTAS.push(pregunta1, pregunta2, pregunta3, pregunta4, pregunta5, pregunta6, pregunta6, pregunta7, pregunta8, pregunta9, pregunta10, pregunta11, pregunta12, pregunta13, pregunta14, pregunta15, pregunta16, pregunta17, pregunta18, pregunta19, pregunta20, pregunta21, pregunta22, pregunta23, pregunta24, pregunta25, pregunta26, pregunta27, pregunta28);
-    return PREGUNTAS
+const segundo = document.querySelector(".segundo")
+class conjuntoPreguntas {
+    constructor(nombre,preguntas){
+        this.nombre = nombre;
+        this.preguntas = preguntas
+    }
+    elegirRandom(){
+        const GETRANDOM = Math.floor(Math.random() * this.preguntas.length);
+        return this.preguntas[GETRANDOM];
+    }
+    crearDiv(contenidoPregunta){
+        if(contenidoPregunta == "" || contenidoPregunta== " "){
+        } else {
+            const DIV = document.createElement("div");
+            DIV.innerText = contenidoPregunta;
+            DIV.classList.add("nuevos")
+            segundo.appendChild(DIV);
+        }
+    }
+    MostrarPregunta(){
+        CONTAINERPREGUNTA.innerText = this.elegirRandom();
+    }
+    agregarPregunta(nuevaPregunta){
+        if (nuevaPregunta === "" || nuevaPregunta === " "){
+        } else {
+            this.preguntas.push(nuevaPregunta)
+        }
+    }
 }
-
+let conjuntoSeleccionado = new conjuntoPreguntas("",[]);
+    let preguntasdmin = ["Cuales son los roles interpersonales","Nombrar dos ejemplos de roles decisionales","Cuales son los tipos de habilides","Cuales son los niveles gerenciales organizacionales","Nombrar a quienes se los denomina gerentes de nivel institucional","Nombrar las variantes q estudia el entorno o ambiente global","Nombrar las formas de internacionalizar a una organización","Habilidad q predomina en el nivel operativo :","Competencias del administrador","Proceso del administrador defini cada uno","Nombra q hacen los diferentes generentes de los niveles organizacionales","Como se evalua el desempeño de un administrador","Características de una organizacion","Diferencias de objetivos organizacionales y objetivos individuales","Quales son los paremetros del sistema nombralos y definilos","Que es homeostasis","Tipos de retrolimentacion","Cuantas propiedades del sistema hay definilas","Como se clasifican los sistemas segun su constitucion y segun su naturaleza","Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica","Como se clasifica la org por los sectores de actividad nombrarlos y definirlos","El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)","Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno","Aspectos formales e informales q son","Cuales son los aspectos de la cultura","Variables q se analizan dentro del riesgo politico","Cuales son las medidas politicas","Que significa outsourcing",]
 botonUsar.onclick = function(){
-    crearConjuntoPreguntas()
+    for(i=0;i<preguntasdmin.length;i++){
+        conjuntoSeleccionado.preguntas.push(preguntasdmin[i])
+        conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.preguntas[i])
+    }
+    console.log(conjuntoSeleccionado.preguntas.length)
+    
 }
-// elegir pregunta y mostrarla 
-function getEleccionRandom(){
-    const GETRANDOM = Math.floor(Math.random() * PREGUNTAS.length);
-    return PREGUNTAS[GETRANDOM];
-}
+// botonUsar.onclick = function(){
+//     conjuntoSeleccionado = new conjuntoPreguntas("introAADMIN",PreguntasAdmin())
+//     for(i=0;i<conjuntoSeleccionado.preguntas.length;i++){
+//         conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.preguntas[i])
+//     }
+    
+// }
 BOTON.onclick = function(){
-    let PREGUNTASELECCIONADA = getEleccionRandom();
-    if (PREGUNTAS.length < 2 ){
+    if (conjuntoSeleccionado.preguntas.length < 2 ){
         alert("agregar al menos 2 preguntas o utiliza un conjunto para empezar");
     }
-    CONTAINERPREGUNTA.textContent = PREGUNTASELECCIONADA;
+        else {conjuntoSeleccionado.MostrarPregunta();
+    }
+    
 }
-// agregar preguntas 
 const espacio = document.getElementById('blank-space');
 const SUBMIT = document.getElementById('submit');
 SUBMIT.onclick = function() {
-    let nuevaPregunta = espacio.value;
-    PREGUNTAS.push(nuevaPregunta);
+    let newPregunta = espacio.value;
+    conjuntoSeleccionado.agregarPregunta(newPregunta)
+    conjuntoSeleccionado.crearDiv(newPregunta);
     espacio.value = "";
 }
+
 
 
 
