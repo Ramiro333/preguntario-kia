@@ -1,1 +1,1 @@
-buenas es para ayudar a mi chica, lo hice en una hora no me critiquen saludos
+retomando proyecto antiguo con nuevos conociemientos de las clases en Coderhouse
