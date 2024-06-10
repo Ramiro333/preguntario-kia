@@ -2,24 +2,58 @@ const BOTON = document.querySelector(".button-19")
 const CONTAINERPREGUNTA = document.querySelector("#espacioPregunta")
 const botonUsar = document.querySelector(".boton-usar");
 const segundo = document.querySelector(".segundo")
+const contenedorDePreguntas = document.querySelector(".contenedorDePreguntas")
 class conjuntoPreguntas {
     constructor(nombre,preguntas){
         this.nombre = nombre;
-        this.preguntas = preguntas
+        this.preguntas = preguntas;
     }
     elegirRandom(){
         const GETRANDOM = Math.floor(Math.random() * this.preguntas.length);
         return this.preguntas[GETRANDOM];
     }
-    crearDiv(contenidoPregunta){
-        //validar preguntas repetidas
-        if(contenidoPregunta == "" || contenidoPregunta== " "){
-        } else {
+    eliminarPregunta(indexElemento){
+        conjuntoSeleccionado.preguntas.splice(indexElemento,1);
+        console.log(conjuntoSeleccionado.preguntas)
+        conjuntoSeleccionado.crearDiv();
+    }
+    crearDiv(){
+        let contador = 0
+        contenedorDePreguntas.innerHTML = ""
+        conjuntoSeleccionado.preguntas.forEach(element => {
+            contador ++;
             const DIV = document.createElement("div");
-            DIV.innerText =this.preguntas.indexOf(contenidoPregunta)+1 + " " + contenidoPregunta;
-            DIV.classList.add("nuevos")
-            segundo.appendChild(DIV);
-        }
+            DIV.classList.add("divPreguntas");
+            contenedorDePreguntas.appendChild(DIV);
+            const P = document.createElement("p");
+            P.innerText = contador + "-";
+            P.innerText +=element;
+            P.classList.add("nuevos");
+            DIV.appendChild(P);
+            const BOTONELIMINAR = document.createElement("button");
+            DIV.appendChild(BOTONELIMINAR);
+            BOTONELIMINAR.innerText="X";
+            BOTONELIMINAR.classList.add("boton-eliminar");
+            DIV.classList.add(contador)
+            BOTONELIMINAR.onclick= function(){
+                let preguntAEliminar = conjuntoSeleccionado.preguntas.indexOf(element);
+                conjuntoSeleccionado.eliminarPregunta(preguntAEliminar);
+                }
+            });
+                // const DIV = document.createElement("div");
+                // DIV.classList.add("divPreguntas");
+                // contenedorDePreguntas.appendChild(DIV);
+                // const P = document.createElement("p");
+                // P.innerText =this.preguntas.indexOf(contenidoPregunta)+1 + "-" + contenidoPregunta;
+                // P.classList.add("nuevos");
+                // DIV.appendChild(P);
+                // const BOTONELIMINAR = document.createElement("button");
+                // DIV.appendChild(BOTONELIMINAR);
+                // BOTONELIMINAR.innerText="X";
+                // BOTONELIMINAR.classList.add("boton-eliminar");
+                // BOTONELIMINAR.onclick= function(){
+                //     // console.log(conjuntoSeleccionado.preguntas.indexOf(contenidoPregunta))
+                //     eliminarPregunta(contenidoPregunta)
     }
     MostrarPregunta(){
         CONTAINERPREGUNTA.innerText = this.elegirRandom();
@@ -36,18 +70,9 @@ const PREGUNTASADMIN= new conjuntoPreguntas ("preguntasAdmin",["Cuales son los r
 botonUsar.onclick = function(){
     for(i=0;i<PREGUNTASADMIN.preguntas.length;i++){
         conjuntoSeleccionado.agregarPregunta(PREGUNTASADMIN.preguntas[i]);
-        conjuntoSeleccionado.crearDiv(PREGUNTASADMIN.preguntas[i]);
-        
     }
-    
+    conjuntoSeleccionado.crearDiv();
 }
-// botonUsar.onclick = function(){
-//     conjuntoSeleccionado = new conjuntoPreguntas("introAADMIN",PreguntasAdmin())
-//     for(i=0;i<conjuntoSeleccionado.preguntas.length;i++){
-//         conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.preguntas[i])
-//     }
-    
-// }
 BOTON.onclick = function(){
     if (conjuntoSeleccionado.preguntas.length < 2 ){
         alert("agregar al menos 2 preguntas o utiliza un conjunto para empezar");
@@ -61,9 +86,13 @@ const SUBMIT = document.getElementById('submit');
 SUBMIT.onclick = function() {
     let newPregunta = espacio.value;
     conjuntoSeleccionado.agregarPregunta(newPregunta)
-    conjuntoSeleccionado.crearDiv(newPregunta);
+    conjuntoSeleccionado.crearDiv();
     espacio.value = "";
 }
+// BOTONELIMINAR.onclick= function(){
+//     console.log(conjuntoSeleccionado.preguntas.indexOf(P.innerText))
+//     // eliminarPregunta(this.)
+// }
 
 
 
