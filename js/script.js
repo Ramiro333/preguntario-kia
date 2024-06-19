@@ -74,7 +74,7 @@ const PREGUNTASADMIN = new conjuntoPreguntas ("preguntasAdmin",["Cuales son los 
 botonUsar.onclick = function(){
     for(i=0;i<PREGUNTASADMIN.preguntas.length;i++){
         conjuntoSeleccionado.agregarPregunta(PREGUNTASADMIN.preguntas[i]);
-    }
+    }   
     conjuntoSeleccionado.crearDiv();
     
 }
