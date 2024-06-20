@@ -82,7 +82,10 @@ body{
     border-radius: 5px;
     padding: 10px;
 }
-
+.contenedor-preguntas-nuevo-conjunto{
+    display: flex;
+    gap: 9px;
+}
 .button-19 {
     appearance: button;
     background-color: #1899D6;
