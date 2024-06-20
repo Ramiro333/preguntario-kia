@@ -166,13 +166,14 @@ body{
 }
 
 .contenedor-conjunto{
+    text-align: center;
     width: 70%;
     height: 60%;
     background-color: #43a4ff;
     border-radius: 5px;
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
     gap: 30px;
 }
 
