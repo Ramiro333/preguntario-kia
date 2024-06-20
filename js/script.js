@@ -29,9 +29,11 @@ class conjuntoPreguntas {
     }
     eliminarPregunta(indexElemento){
         this.preguntas.splice(indexElemento,1);
+        //llamo crear div para actualizar lista del dom
         conjuntoSeleccionado.crearDiv();
     }
     crearDiv(){
+        //crear div muestra en el dom las preguntas del conjunto seleccionada, esta funcion es llamada siempre q se hace un cambio en el array de preguntas, para q se actualice su numero constantemente
         let contador = 0
         contenedorDePreguntas.innerHTML = ""
         this.preguntas.forEach(element => {
@@ -60,7 +62,6 @@ class conjuntoPreguntas {
     }
     agregarPregunta(nuevaPregunta){
         if (this.preguntasRepetidas(nuevaPregunta) || nuevaPregunta == "" || nuevaPregunta== " "){
-            this.añadirMensajeError(nuevaPregunta);
             
         }  else {
             this.preguntas.push(nuevaPregunta);
@@ -73,6 +74,7 @@ class conjuntoPreguntas {
     preguntasRepetidas(preguntaACorroborar){
         for (let value of this.preguntas){
             if (value == preguntaACorroborar){
+                this.añadirMensajeError(preguntaACorroborar);
                 return true;
             } 
         }
@@ -86,8 +88,9 @@ class conjuntoPreguntas {
     }
 
 }
-// cargo preguntas de la ultima sesion//
+//inicializo el nuevo conjunto y lo dejo vacio para acceder en los proximos eventos
 let conjuntoSeleccionado = new conjuntoPreguntas("",[]);
+// cargo preguntas de la ultima sesion//
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
     conjuntoSeleccionado.crearDiv();
@@ -106,12 +109,14 @@ botonUsar.onclick = function(){
 }
 boton.onclick = function(){
     if (conjuntoSeleccionado.preguntas.length < 2 ){
+        //validacion 
         alert("agregar al menos 2 preguntas o utiliza un conjunto para empezar");
     }
         else {conjuntoSeleccionado.MostrarPregunta();
     }
 }
 submit.onclick = function() {
+    //uso un submit para agrear preguntas al array y luego lo vacio para poner la proxima pregunta
     let newPregunta = espacio.value;
     conjuntoSeleccionado.agregarPregunta(newPregunta)
     conjuntoSeleccionado.crearDiv();
@@ -121,16 +126,20 @@ botonGuardar.addEventListener("click",()=>{
     conjuntoSeleccionado.agregarALocarStorage()
 })
 botonEliminarTodo.addEventListener("click",()=>{
-    contenedorDePreguntas.innerHTML="";
+    //resetea el el array internamente y llamo la funcion creardiv para limpiar el dom
     conjuntoSeleccionado.eliminarTodasLasPreguntas();
+    conjuntoSeleccionado.crearDiv();
 })
+//**EN DESARROLLO** creo un nuevo conjunto y lo agrego a los conjuntos usables
 function crearDivDeConjunto(nuevoConjunto){
+    //lo creo en el dom
     const contenedorNuevo = document.createElement("div");
     const textoNuevo = document.createElement("p");
     const botonNuevo = document.createElement("button");
     botonNuevo.innerText = "USAR";
     botonNuevo.classList.add("button-19");
     botonNuevo.addEventListener("click", ()=>{
+        //uso la funcion para mostrarlas en el dom
         agregarPreguntasAlConjunto(nuevoConjunto);
     })
     textoNuevo.innerHTML=nuevoConjunto.nombre;
@@ -140,9 +149,11 @@ function crearDivDeConjunto(nuevoConjunto){
     conjuntosJuntos.appendChild(contenedorNuevo);
 }
 function crearNuevoConjunto(){
+    //creo el objeto en la memoria
     let nombreDelConjunto = inputNombreConjunto.value;
     let preguntasDelConjunto = arrayNuevasPreguntas;
     let nuevoConjunto = new conjuntoPreguntas(nombreDelConjunto,preguntasDelConjunto);
+    //creo el objeto en el dom
     crearDivDeConjunto (nuevoConjunto);
 }
 let arrayNuevasPreguntas=[];
@@ -160,7 +171,3 @@ botonAgregarPreguntas.addEventListener("click", ()=>{
     blankSpacePreguntaConjunto.value = "";
 })
 
-// const contenedorPreguntasNuevoConjunto = document.querySelector(".contenedor-preguntas-nuevo-conjunto");
-// const contenedorNuevasPreguntas = document.querySelector(".contenedor-nuevas-preguntas");
-// const blankSpacePreguntaConjunto = document.querySelector(".blank-space-pregunta-conjunto");
-// const botonAgregarPreguntas = document.querySelector(".boton-agregar-preguntas");
