@@ -96,8 +96,8 @@ function cargarPreguntasGuardadas(){
         conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
     
 }
+// cargo preguntas de la ultima sesion usando un boton(descubri un bug muy grande q sin hacer esto rompe todos mis objetos, no se porque)
 botonCargar.addEventListener("click",()=>{
-    console.log(localStorage.preguntasGuardadas.length)
     if(localStorage.preguntasGuardadas.length>2){
         cargarPreguntasGuardadas()
     } else {
@@ -105,13 +105,9 @@ botonCargar.addEventListener("click",()=>{
         contenedorCargarGuardar.appendChild(errorCargar);
     }
 })
-
-
-
 const preguntasAdmin = new conjuntoPreguntas ("preguntasAdmin",["Cuales son los roles interpersonales","Nombrar dos ejemplos de roles decisionales","Cuales son los tipos de habilides","Cuales son los niveles gerenciales organizacionales","Nombrar a quienes se los denomina gerentes de nivel institucional","Nombrar las variantes q estudia el entorno o ambiente global","Nombrar las formas de internacionalizar a una organización","Habilidad q predomina en el nivel operativo :","Competencias del administrador","Proceso del administrador defini cada uno","Nombra q hacen los diferentes generentes de los niveles organizacionales","Como se evalua el desempeño de un administrador","Características de una organizacion","Diferencias de objetivos organizacionales y objetivos individuales","Quales son los paremetros del sistema nombralos y definilos","Que es homeostasis","Tipos de retrolimentacion","Cuantas propiedades del sistema hay definilas","Como se clasifican los sistemas segun su constitucion y segun su naturaleza","Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica","Como se clasifica la org por los sectores de actividad nombrarlos y definirlos","El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)","Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno","Aspectos formales e informales q son","Cuales son los aspectos de la cultura","Variables q se analizan dentro del riesgo politico","Cuales son las medidas politicas","Que significa outsourcing"],primer);
 //funcion solo a usar para meter preguntas a las seleccionadas
 function agregarPreguntasAlConjunto(arrayAgregar){
-    console.log(arrayAgregar.preguntas)
     for(i=0;i<arrayAgregar.preguntas.length;i++){
         conjuntoSeleccionado.agregarPregunta(arrayAgregar.preguntas[i]);
     }
@@ -178,9 +174,7 @@ function crearDivDeConjunto(nuevoConjunto){
     conjuntosJuntos.appendChild(nombreDelConjuntoCreado);
     nombreDelConjuntoCreado.appendChild(contenedorNuevo);
     nuevoConjunto.lugar=contenedorNuevo;
-
 }
-
 function crearNuevoConjunto(nuevoConjunto){
     crearDivDeConjunto(nuevoConjunto);
 }
@@ -194,6 +188,5 @@ botonCrearConjunto.addEventListener("click", ()=>{
 botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
 })
-// cargo preguntas de la ultima sesion//
 
 
