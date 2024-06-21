@@ -15,7 +15,10 @@ const conjuntosJuntos = document.querySelector(".conjuntos-juntos");
 const contenedorPreguntasNuevoConjunto = document.querySelector(".contenedor-preguntas-nuevo-conjunto");
 const botonAgregarPreguntas = document.querySelector(".boton-agregar-preguntas");
 const espacioErrorRepetido = document.querySelector(".espacio-error-repetido");
+const botonCargar = document.querySelector(".boton-cargar");
 const pNuevoError = document.createElement("p");
+const errorCargar = document.createElement("p");
+const contenedorCargarGuardar = document.querySelector(".cargar-guardar");
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
@@ -60,10 +63,10 @@ class conjuntoPreguntas {
         containerPreguntas.innerText = this.elegirRandom();
     }
     agregarPregunta(nuevaPregunta){
-        console.log(nuevaPregunta);
         if (this.preguntasRepetidas(nuevaPregunta) || nuevaPregunta == "" || nuevaPregunta== " "){
             
-        }  else {
+        } 
+        else {
             this.preguntas.push(nuevaPregunta);
         }
     }
@@ -71,9 +74,7 @@ class conjuntoPreguntas {
         pNuevoError.innerText = preguntaRepetida + " ya esta usada";
         lugarNuevoError.parentNode.appendChild(pNuevoError);
     }
-    preguntasRepetidas(preguntaACorroborar){
-        console.log(this.preguntas);
-        
+    preguntasRepetidas(preguntaACorroborar){   
         for (let value of this.preguntas){
             if (value === preguntaACorroborar){
                 this.añadirMensajeError(preguntaACorroborar,this.lugar);
@@ -90,24 +91,35 @@ class conjuntoPreguntas {
     }
 }
 let conjuntoSeleccionado = new conjuntoPreguntas("",[],primer);
-// cargo preguntas de la ultima sesion//
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
-    conjuntoSeleccionado.crearDiv(primer);
+        conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
+    
 }
-cargarPreguntasGuardadas();
+botonCargar.addEventListener("click",()=>{
+    console.log(localStorage.preguntasGuardadas.length)
+    if(localStorage.preguntasGuardadas.length>2){
+        cargarPreguntasGuardadas()
+    } else {
+        errorCargar.innerText="no hay preguntas guardadas";
+        contenedorCargarGuardar.appendChild(errorCargar);
+    }
+})
+
+
+
 const preguntasAdmin = new conjuntoPreguntas ("preguntasAdmin",["Cuales son los roles interpersonales","Nombrar dos ejemplos de roles decisionales","Cuales son los tipos de habilides","Cuales son los niveles gerenciales organizacionales","Nombrar a quienes se los denomina gerentes de nivel institucional","Nombrar las variantes q estudia el entorno o ambiente global","Nombrar las formas de internacionalizar a una organización","Habilidad q predomina en el nivel operativo :","Competencias del administrador","Proceso del administrador defini cada uno","Nombra q hacen los diferentes generentes de los niveles organizacionales","Como se evalua el desempeño de un administrador","Características de una organizacion","Diferencias de objetivos organizacionales y objetivos individuales","Quales son los paremetros del sistema nombralos y definilos","Que es homeostasis","Tipos de retrolimentacion","Cuantas propiedades del sistema hay definilas","Como se clasifican los sistemas segun su constitucion y segun su naturaleza","Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica","Como se clasifica la org por los sectores de actividad nombrarlos y definirlos","El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)","Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno","Aspectos formales e informales q son","Cuales son los aspectos de la cultura","Variables q se analizan dentro del riesgo politico","Cuales son las medidas politicas","Que significa outsourcing"],primer);
 //funcion solo a usar para meter preguntas a las seleccionadas
 function agregarPreguntasAlConjunto(arrayAgregar){
+    console.log(arrayAgregar.preguntas)
     for(i=0;i<arrayAgregar.preguntas.length;i++){
-        console.log(arrayAgregar.preguntas[i]);
         conjuntoSeleccionado.agregarPregunta(arrayAgregar.preguntas[i]);
     }
     conjuntoSeleccionado.crearDiv(primer);
 }
 botonUsar.onclick = function(){
     agregarPreguntasAlConjunto(preguntasAdmin);
-    console.log(preguntasAdmin);
+    
 }
 botonRandom.onclick = function(){
     if (conjuntoSeleccionado.preguntas.length < 2 ){
@@ -182,4 +194,6 @@ botonCrearConjunto.addEventListener("click", ()=>{
 botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
 })
+// cargo preguntas de la ultima sesion//
+
 
