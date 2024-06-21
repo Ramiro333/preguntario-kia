@@ -13,10 +13,10 @@ const inputNombreConjunto = document.querySelector("#blank-space-nombre-conjunto
 const botonAgregarNombre = document.querySelector(".boton-agregar-nombre");
 const conjuntosJuntos = document.querySelector(".conjuntos-juntos")
 const contenedorPreguntasNuevoConjunto = document.querySelector(".contenedor-preguntas-nuevo-conjunto");
-
 const botonAgregarPreguntas = document.querySelector(".boton-agregar-preguntas");
 const espacioErrorRepetido = document.querySelector(".espacio-error-repetido")
 const pNuevoError = document.createElement("p");
+let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
         this.nombre = nombre;
@@ -48,12 +48,11 @@ class conjuntoPreguntas {
             div.appendChild(botonEliminarCadaPregunta);
             botonEliminarCadaPregunta.innerText="X";
             botonEliminarCadaPregunta.classList.add("boton-eliminar");
-            // div.classList.add(contador);
             const self = this;
             botonEliminarCadaPregunta.onclick= function(){
-                let lugareliminar = self.lugar;
+                let lugarEliminar = self.lugar;
                 let preguntAEliminar = self.preguntas.indexOf(element);
-                self.eliminarPregunta(preguntAEliminar,lugareliminar);
+                self.eliminarPregunta(preguntAEliminar,lugarEliminar);
                 }
             });
     }
@@ -61,50 +60,56 @@ class conjuntoPreguntas {
         containerPreguntas.innerText = this.elegirRandom();
     }
     agregarPregunta(nuevaPregunta){
+        console.log(nuevaPregunta)
         if (this.preguntasRepetidas(nuevaPregunta) || nuevaPregunta == "" || nuevaPregunta== " "){
             
         }  else {
             this.preguntas.push(nuevaPregunta);
         }
     }
-    añadirMensajeError(preguntaRepetida){
+    añadirMensajeError(preguntaRepetida,lugarNuevoError){
         pNuevoError.innerText = preguntaRepetida + " ya esta usada";
-        espacioErrorRepetido.appendChild(pNuevoError);
+        lugarNuevoError.parentNode.appendChild(pNuevoError);
     }
     preguntasRepetidas(preguntaACorroborar){
+        console.log(this.preguntas)
+        
         for (let value of this.preguntas){
-            if (value == preguntaACorroborar){
-                this.añadirMensajeError(preguntaACorroborar);
+            if (value === preguntaACorroborar){
+                this.añadirMensajeError(preguntaACorroborar,this.lugar);
                 return true;
             } 
         }
         return false;
     }
-    agregarALocarStorage(){
-        localStorage.setItem("preguntasGuardadas",JSON.stringify(this.preguntas));
-    }
     eliminarTodasLasPreguntas(){
         this.preguntas = [];
     }
+    agregarALocarStorage(){
+        localStorage.setItem("preguntasGuardadas",JSON.stringify(this.preguntas));
+    }
 
 }
-// cargo preguntas de la ultima sesion//
+
 let conjuntoSeleccionado = new conjuntoPreguntas("",[],primer);
+// cargo preguntas de la ultima sesion//
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
-    conjuntoSeleccionado.crearDiv(primer);
+    conjuntoSeleccionado.crearDiv(primer)
 }
 cargarPreguntasGuardadas();
-const preguntasAdmin = new conjuntoPreguntas ("preguntasAdmin",["Cuales son los roles interpersonales","Nombrar dos ejemplos de roles decisionales","Cuales son los tipos de habilides","Cuales son los niveles gerenciales organizacionales","Nombrar a quienes se los denomina gerentes de nivel institucional","Nombrar las variantes q estudia el entorno o ambiente global","Nombrar las formas de internacionalizar a una organización","Habilidad q predomina en el nivel operativo :","Competencias del administrador","Proceso del administrador defini cada uno","Nombra q hacen los diferentes generentes de los niveles organizacionales","Como se evalua el desempeño de un administrador","Características de una organizacion","Diferencias de objetivos organizacionales y objetivos individuales","Quales son los paremetros del sistema nombralos y definilos","Que es homeostasis","Tipos de retrolimentacion","Cuantas propiedades del sistema hay definilas","Como se clasifican los sistemas segun su constitucion y segun su naturaleza","Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica","Como se clasifica la org por los sectores de actividad nombrarlos y definirlos","El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)","Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno","Aspectos formales e informales q son","Cuales son los aspectos de la cultura","Variables q se analizan dentro del riesgo politico","Cuales son las medidas politicas","Que significa outsourcing",],primer);
+const preguntasAdmin = new conjuntoPreguntas ("preguntasAdmin",["Cuales son los roles interpersonales","Nombrar dos ejemplos de roles decisionales","Cuales son los tipos de habilides","Cuales son los niveles gerenciales organizacionales","Nombrar a quienes se los denomina gerentes de nivel institucional","Nombrar las variantes q estudia el entorno o ambiente global","Nombrar las formas de internacionalizar a una organización","Habilidad q predomina en el nivel operativo :","Competencias del administrador","Proceso del administrador defini cada uno","Nombra q hacen los diferentes generentes de los niveles organizacionales","Como se evalua el desempeño de un administrador","Características de una organizacion","Diferencias de objetivos organizacionales y objetivos individuales","Quales son los paremetros del sistema nombralos y definilos","Que es homeostasis","Tipos de retrolimentacion","Cuantas propiedades del sistema hay definilas","Como se clasifican los sistemas segun su constitucion y segun su naturaleza","Clasifica la org segun su finalidad, tamaño, regimen juridico, actividad economica","Como se clasifica la org por los sectores de actividad nombrarlos y definirlos","El ambiente general o contexto mediato impacta en la org de manera directa?(V/F)","Cuales son las variables q componen el entorno mediato o contexto general, ambiente de tarea y el ambiente interno","Aspectos formales e informales q son","Cuales son los aspectos de la cultura","Variables q se analizan dentro del riesgo politico","Cuales son las medidas politicas","Que significa outsourcing"],primer);
 //funcion solo a usar para meter preguntas a las seleccionadas
 function agregarPreguntasAlConjunto(arrayAgregar){
     for(i=0;i<arrayAgregar.preguntas.length;i++){
-        conjuntoSeleccionado.agregarPregunta(arrayAgregar.preguntas[i])
+        console.log(arrayAgregar.preguntas[i])
+        conjuntoSeleccionado.agregarPregunta(arrayAgregar.preguntas[i]);
     }
     conjuntoSeleccionado.crearDiv(primer);
 }
 botonUsar.onclick = function(){
     agregarPreguntasAlConjunto(preguntasAdmin);
+    console.log(preguntasAdmin)
 }
 botonRandom.onclick = function(){
     if (conjuntoSeleccionado.preguntas.length < 2 ){
@@ -124,28 +129,24 @@ submit.onclick = function() {
 botonGuardar.addEventListener("click",()=>{
     conjuntoSeleccionado.agregarALocarStorage()
 })
+
 botonEliminarTodo.addEventListener("click",()=>{
     primer.innerHTML="";
     conjuntoSeleccionado.eliminarTodasLasPreguntas();
-    conjuntoSeleccionado.crearDiv();
+    conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
 })
-let contadorNuevoConjunto = "0";
 function crearDivDeConjunto(nuevoConjunto){
-    console.log(nuevoConjunto)
-    contadorNuevoConjunto+=contadorNuevoConjunto;
     const contenedorParaInput = document.createElement("div");
     const inputPlaceNuevoConjunto = document.createElement("input");
     const botonAgregarPreguntaNuevoConjunto = document.createElement("button");
     const contenedorNuevo = document.createElement("div");
-    contenedorNuevo.setAttribute("id",contadorNuevoConjunto);
     botonAgregarPreguntaNuevoConjunto.innerText = "agregar";
     botonAgregarPreguntaNuevoConjunto.addEventListener("click",()=>{
         let nuevaPreguntaConjuntoNuevo =  inputPlaceNuevoConjunto.value;
         nuevoConjunto.agregarPregunta(nuevaPreguntaConjuntoNuevo);
         inputPlaceNuevoConjunto.value="";
-        console.log(primer);
-        console.log(nuevoConjunto);
         nuevoConjunto.crearDiv(contenedorNuevo);
+        return nuevoConjunto;
     })
     const nombreDelConjuntoCreado = document.createElement("div");
     const textoNuevo = document.createElement("p");
@@ -155,6 +156,7 @@ function crearDivDeConjunto(nuevoConjunto){
     botonNuevo.addEventListener("click", ()=>{
         //uso la funcion para mostrarlas en el dom
         agregarPreguntasAlConjunto(nuevoConjunto);
+
     })
     textoNuevo.innerHTML=nuevoConjunto.nombre;
     nombreDelConjuntoCreado.appendChild(textoNuevo);
@@ -166,8 +168,7 @@ function crearDivDeConjunto(nuevoConjunto){
     conjuntosJuntos.appendChild(nombreDelConjuntoCreado);
     nombreDelConjuntoCreado.appendChild(contenedorNuevo);//!
     nuevoConjunto.lugar=contenedorNuevo;
-    console.log(nuevoConjunto.lugar)
-    // nuevoConjunto.crearDiv(nuevoConjunto.lugar)
+
 }
 
 function crearNuevoConjunto(nuevoConjunto){
