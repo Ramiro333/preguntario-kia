@@ -1,1 +1,4 @@
 retomando proyecto antiguo con nuevos conociemientos de las clases en Coderhouse
+TERCERA PREENTREGA 20/06
+me queda guardar los conjuntos en json para poder usarlos y guardarlos como se quiera, hacer lo mismo q al guardar todas las preguntas, aun esta end esarrollo algunas funcionaldiades, tambien me queda acomodar mejor el codigo, por obvias razones prefiero ahcer esto al terminar el proyecto, no le veo sentido hacerlo cuando aun se esta desarrollando, se esta en constante cambio.
+quedan muchisimas validaciones por hacer, cuales presentare para el proyecto final, asi como un estilo mejorado, eso lo estoy dejando para el final dado a que considero que es mejor pulir detalles cuando la obra esta finalizada y no en el medio del proceso
