@@ -24,6 +24,8 @@ const contenedorNombres = document.querySelector(".contenedor-nombres");
 const preguntero = document.querySelector(".preguntero");
 const errorPreguntaRepetida = document.createElement("p");
 errorPreguntaRepetida.innerHTML="escribe una pregunta valida";
+const mensajePreguntasGuardadas = document.createElement("p");
+mensajePreguntasGuardadas.innerText="preguntas guardadas:)";
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
@@ -156,6 +158,8 @@ submit.onclick = function() {
 //guardo las preguntas en local storage
 botonGuardar.addEventListener("click",()=>{
     conjuntoSeleccionado.agregarALocarStorage();
+    contenedorCargarGuardar.appendChild(mensajePreguntasGuardadas);
+    setTimeout(()=> mensajePreguntasGuardadas.remove(),3000);
 })
 botonEliminarTodo.addEventListener("click",()=>{
     primer.innerHTML="";
