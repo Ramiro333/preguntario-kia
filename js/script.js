@@ -84,7 +84,7 @@ class conjuntoPreguntas {
     }
     añadirMensajeError(preguntaRepetida,lugarNuevoError){
         pNuevoError.innerText ='"'+ preguntaRepetida+'"' + " ya esta usada";
-        lugarNuevoError.parentNode.appendChild(pNuevoError);
+        lugarNuevoError.parentNode.insertBefore(pNuevoError,lugarNuevoError);
         setTimeout(()=> pNuevoError.remove(),4000);
     }
     preguntasRepetidas(preguntaACorroborar){   
