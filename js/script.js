@@ -221,7 +221,7 @@ botonCrearConjunto.addEventListener("click", ()=>{
         crearYNombrarConjunto.appendChild(mensajeErrorSinNombre);
         setTimeout(()=> mensajeErrorSinNombre.remove(),3000);
     } else {
-        crearNuevoObjeto("",[],)
+        crearNuevoObjeto(nombreDelConjunto,[],)
 
     }
 })
