@@ -23,6 +23,7 @@ body{
     flex-direction: column;
     border-radius: 5px;
     background-color: rgb(125, 134, 255);
+    align-items: center;
 }
 .segundo{
     margin-top: 50px;
@@ -86,6 +87,10 @@ body{
     display: flex;
     gap: 9px;
 }
+.contendor-botones-guardar-conjuntos{
+    display: flex;
+    flex-direction: column;
+}
 .button-19 {
     appearance: button;
     background-color: #1899D6;
@@ -114,7 +119,9 @@ body{
     -webkit-user-select: none;
     vertical-align: middle;
     white-space: nowrap;
-    width: 40%;
+    margin: 2%;
+    width: 70%;
+    
 }
 
 .button-19:after {

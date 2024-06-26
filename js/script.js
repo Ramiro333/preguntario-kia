@@ -23,11 +23,12 @@ const crearYNombrarConjunto = document.querySelector(".crear-y-nombrar-conjunto"
 const contenedorNombres = document.querySelector(".contenedor-nombres");
 const preguntero = document.querySelector(".preguntero");
 const errorPreguntaRepetida = document.createElement("p");
-errorPreguntaRepetida.innerHTML="escribe una pregunta valida";
+errorPreguntaRepetida.innerHTML="la pregunta no puede estar vacia";
 const mensajePreguntasGuardadas = document.createElement("p");
 mensajePreguntasGuardadas.innerText="preguntas guardadas:)";
 const botonGuardarConjuntos = document.querySelector(".boton-guardar-conjuntos");
 const botonEliminarConjuntosGuardados = document.querySelector(".boton-eliminar-conjuntos-guardados");
+const contenedorGuardarConjuntos = document.querySelector(".contenedor-guardar-conjuntos");
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
@@ -76,14 +77,11 @@ class conjuntoPreguntas {
         if (this.preguntasRepetidas(nuevaPregunta)){
 
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
-
-            segundo.appendChild(errorPreguntaRepetida)
+            this.lugar.parentNode.appendChild(errorPreguntaRepetida);
             setTimeout(()=> errorPreguntaRepetida.remove(),3000);
         }
         else {
-
             this.preguntas.push(nuevaPregunta);
-
         }
     }
     añadirMensajeError(preguntaRepetida,lugarNuevoError){
@@ -143,8 +141,10 @@ botonRandom.onclick = function(){
         errorPocasPreguntas.innerHTML="debes elegir al menos 2 preguntas o utilizar un conjunto";
         preguntero.appendChild(errorPocasPreguntas);
         setTimeout(()=> errorPocasPreguntas.remove(),6000);
+        containerPreguntas.innerText = "";
     }
-        else {conjuntoSeleccionado.MostrarPregunta();
+        else {
+            conjuntoSeleccionado.MostrarPregunta();
     }
 }
 submit.onclick = function() {
