@@ -26,6 +26,8 @@ const errorPreguntaRepetida = document.createElement("p");
 errorPreguntaRepetida.innerHTML="escribe una pregunta valida";
 const mensajePreguntasGuardadas = document.createElement("p");
 mensajePreguntasGuardadas.innerText="preguntas guardadas:)";
+const botonGuardarConjuntos = document.querySelector(".boton-guardar-conjuntos");
+const botonEliminarConjuntosGuardados = document.querySelector(".boton-eliminar-conjuntos-guardados");
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
@@ -79,7 +81,9 @@ class conjuntoPreguntas {
             setTimeout(()=> errorPreguntaRepetida.remove(),3000);
         }
         else {
+            console.log(this)
             this.preguntas.push(nuevaPregunta);
+            
         }
     }
     añadirMensajeError(preguntaRepetida,lugarNuevoError){
@@ -167,6 +171,7 @@ function crearDivDeConjunto(nuevoConjunto){
     const botonAgregarPreguntaNuevoConjunto = document.createElement("button");
     const contenedorNuevo = document.createElement("div");
     botonAgregarPreguntaNuevoConjunto.innerText = "agregar";
+    
     botonAgregarPreguntaNuevoConjunto.addEventListener("click",()=>{
         let nuevaPreguntaConjuntoNuevo =  inputPlaceNuevoConjunto.value;
         nuevoConjunto.agregarPregunta(nuevaPreguntaConjuntoNuevo);
@@ -194,12 +199,21 @@ function crearDivDeConjunto(nuevoConjunto){
     conjuntosJuntos.appendChild(nombreDelConjuntoCreado);
     nombreDelConjuntoCreado.appendChild(contenedorNuevo);
     nuevoConjunto.lugar=contenedorNuevo;
+    console.log(nuevoConjunto.lugar)
+    nuevoConjunto.crearDiv(nuevoConjunto.lugar);
+    
 }
 function crearNuevoConjunto(nuevoConjunto){
     crearDivDeConjunto(nuevoConjunto);
 }
 const mensajeErrorSinNombre = document.createElement("p");
-let nombreDelConjunto = "";
+
+function crearNuevoObjeto(nombreDelConjunto,preguntasDelArray,lugarDelArray) {
+    let pasarConjunto = new conjuntoPreguntas(nombreDelConjunto,preguntasDelArray,lugarDelArray);
+    todosLosConjuntos.push(pasarConjunto);
+    console.log(todosLosConjuntos);
+    crearNuevoConjunto(pasarConjunto);
+}
 botonCrearConjunto.addEventListener("click", ()=>{
     if(nombreDelConjunto===""||nombreDelConjunto===" "){
         //valido el nombre
@@ -207,8 +221,8 @@ botonCrearConjunto.addEventListener("click", ()=>{
         crearYNombrarConjunto.appendChild(mensajeErrorSinNombre);
         setTimeout(()=> mensajeErrorSinNombre.remove(),3000);
     } else {
-        let pasarConjunto = new conjuntoPreguntas(nombreDelConjunto,[],);
-        crearNuevoConjunto(pasarConjunto);
+        crearNuevoObjeto("",[],)
+
     }
 })
 const nombreCreado = document.createElement("p");
@@ -226,4 +240,19 @@ botonAgregarNombre.addEventListener("click", ()=>{
     }    
 })
 
-
+botonGuardarConjuntos.addEventListener("click", ()=>{
+    localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
+})
+function cargarConjuntosGuardados(){
+    let loscon = JSON.parse(localStorage.getItem("conjuntosGuardados"))
+    console.log(loscon)
+    
+    for(i=0;i<loscon.length;i++){
+        crearNuevoObjeto(loscon[i].nombre,loscon[i].preguntas,loscon[i].lugar);
+    }
+}
+cargarConjuntosGuardados()
+botonEliminarConjuntosGuardados.addEventListener("click", ()=>{
+    todosLosConjuntos=[]
+    localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
+})
