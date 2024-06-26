@@ -76,14 +76,14 @@ class conjuntoPreguntas {
         if (this.preguntasRepetidas(nuevaPregunta)){
 
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
-            
+
             segundo.appendChild(errorPreguntaRepetida)
             setTimeout(()=> errorPreguntaRepetida.remove(),3000);
         }
         else {
-            console.log(this)
+
             this.preguntas.push(nuevaPregunta);
-            
+
         }
     }
     añadirMensajeError(preguntaRepetida,lugarNuevoError){
@@ -91,12 +91,12 @@ class conjuntoPreguntas {
         lugarNuevoError.parentNode.insertBefore(pNuevoError,lugarNuevoError);
         setTimeout(()=> pNuevoError.remove(),4000);
     }
-    preguntasRepetidas(preguntaACorroborar){   
+    preguntasRepetidas(preguntaACorroborar){
         for (let value of this.preguntas){
             if (value === preguntaACorroborar){
                 this.añadirMensajeError(preguntaACorroborar,this.lugar);
                 return true;
-            } 
+            }
         }
         return false;
     }
@@ -111,7 +111,7 @@ let conjuntoSeleccionado = new conjuntoPreguntas("",[],primer);
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
-    
+
 }
 // cargo preguntas de la ultima sesion usando un boton(descubri un bug muy grande q sin hacer esto rompe todos mis objetos, no se porque)
 botonCargar.addEventListener("click",()=>{
@@ -134,7 +134,7 @@ function agregarPreguntasAlConjunto(arrayAgregar){
 }
 botonUsar.onclick = function(){
     agregarPreguntasAlConjunto(preguntasAdmin);
-    
+
 }
 const errorPocasPreguntas = document.createElement("p");
 botonRandom.onclick = function(){
@@ -171,7 +171,6 @@ function crearDivDeConjunto(nuevoConjunto){
     const botonAgregarPreguntaNuevoConjunto = document.createElement("button");
     const contenedorNuevo = document.createElement("div");
     botonAgregarPreguntaNuevoConjunto.innerText = "agregar";
-    
     botonAgregarPreguntaNuevoConjunto.addEventListener("click",()=>{
         let nuevaPreguntaConjuntoNuevo =  inputPlaceNuevoConjunto.value;
         nuevoConjunto.agregarPregunta(nuevaPreguntaConjuntoNuevo);
@@ -187,7 +186,6 @@ function crearDivDeConjunto(nuevoConjunto){
     botonNuevo.addEventListener("click", ()=>{
         //uso la funcion para mostrarlas en el dom
         agregarPreguntasAlConjunto(nuevoConjunto);
-
     })
     textoNuevo.innerHTML=nuevoConjunto.nombre;
     nombreDelConjuntoCreado.appendChild(textoNuevo);
@@ -199,33 +197,52 @@ function crearDivDeConjunto(nuevoConjunto){
     conjuntosJuntos.appendChild(nombreDelConjuntoCreado);
     nombreDelConjuntoCreado.appendChild(contenedorNuevo);
     nuevoConjunto.lugar=contenedorNuevo;
-    console.log(nuevoConjunto.lugar)
+
     nuevoConjunto.crearDiv(nuevoConjunto.lugar);
-    
 }
 function crearNuevoConjunto(nuevoConjunto){
-    crearDivDeConjunto(nuevoConjunto);
+    // if(){
+
+    // } else {
+        crearDivDeConjunto(nuevoConjunto);
+    // }
+
 }
 const mensajeErrorSinNombre = document.createElement("p");
 
 function crearNuevoObjeto(nombreDelConjunto,preguntasDelArray,lugarDelArray) {
     let pasarConjunto = new conjuntoPreguntas(nombreDelConjunto,preguntasDelArray,lugarDelArray);
     todosLosConjuntos.push(pasarConjunto);
-    console.log(todosLosConjuntos);
+
     crearNuevoConjunto(pasarConjunto);
+}
+function validarNombreRepetido(nombreAValidar){
+    //recorro los nombres de todos los conjuntos para validar qe no se repitan
+    for(i=0;i<todosLosConjuntos.length;i++){
+        if(nombreAValidar == todosLosConjuntos[i].nombre){
+            return false
+        }
+    }
+    return true 
+    
 }
 botonCrearConjunto.addEventListener("click", ()=>{
     if(nombreDelConjunto===""||nombreDelConjunto===" "){
         //valido el nombre
         mensajeErrorSinNombre.innerText = "debes ponerle un nombre valido a tu conjunto";
+        crearYNombrarConjunto.appendChild(mensajeErrorSinNombre);//! ! ! hacer en funcion
+        setTimeout(()=> mensajeErrorSinNombre.remove(),3000);
+    } else if(validarNombreRepetido(nombreDelConjunto)) {
+        crearNuevoObjeto(nombreDelConjunto,[],)
+    } else{
+        mensajeErrorSinNombre.innerText = `ya existe un conjunto llamado ${nombreDelConjunto}`;
         crearYNombrarConjunto.appendChild(mensajeErrorSinNombre);
         setTimeout(()=> mensajeErrorSinNombre.remove(),3000);
-    } else {
-        crearNuevoObjeto(nombreDelConjunto,[],)
-
     }
 })
 const nombreCreado = document.createElement("p");
+let nombreDelConjunto = ""
+
 botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
     if(nombreDelConjunto==""||nombreDelConjunto==" "){
@@ -233,23 +250,26 @@ botonAgregarNombre.addEventListener("click", ()=>{
         nombreCreado.innerText ="nombre no valido";
         contenedorNombres.appendChild(nombreCreado);
         setTimeout(()=> nombreCreado.remove(),3000);
-    } else {
+    }else {
         nombreDelConjunto = inputNombreConjunto.value;
         nombreCreado.innerText = "nombre elegido: "+ nombreDelConjunto;
         contenedorNombres.appendChild(nombreCreado);
-    }    
+    }
 })
 
 botonGuardarConjuntos.addEventListener("click", ()=>{
     localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
 })
 function cargarConjuntosGuardados(){
-    let loscon = JSON.parse(localStorage.getItem("conjuntosGuardados"))
-    console.log(loscon)
-    
-    for(i=0;i<loscon.length;i++){
-        crearNuevoObjeto(loscon[i].nombre,loscon[i].preguntas,loscon[i].lugar);
+    let ConjuntosEnLocalStorage = JSON.parse(localStorage.getItem("conjuntosGuardados"))
+    if(ConjuntosEnLocalStorage==[]){
+
+    } else {
+        for(i=0;i<ConjuntosEnLocalStorage.length;i++){
+            crearNuevoObjeto(ConjuntosEnLocalStorage[i].nombre,ConjuntosEnLocalStorage[i].preguntas,ConjuntosEnLocalStorage[i].lugar);
+        }
     }
+
 }
 cargarConjuntosGuardados()
 botonEliminarConjuntosGuardados.addEventListener("click", ()=>{
