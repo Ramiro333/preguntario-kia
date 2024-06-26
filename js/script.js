@@ -22,13 +22,13 @@ const contenedorCargarGuardar = document.querySelector(".cargar-guardar");
 const crearYNombrarConjunto = document.querySelector(".crear-y-nombrar-conjunto");
 const contenedorNombres = document.querySelector(".contenedor-nombres");
 const preguntero = document.querySelector(".preguntero");
-const errorPreguntaRepetida = document.createElement("p");
-errorPreguntaRepetida.innerHTML="la pregunta no puede estar vacia";
 const mensajePreguntasGuardadas = document.createElement("p");
 mensajePreguntasGuardadas.innerText="preguntas guardadas:)";
 const botonGuardarConjuntos = document.querySelector(".boton-guardar-conjuntos");
 const botonEliminarConjuntosGuardados = document.querySelector(".boton-eliminar-conjuntos-guardados");
 const contenedorGuardarConjuntos = document.querySelector(".contenedor-guardar-conjuntos");
+const mensajeConjuntosGuardados = document.createElement("p");
+
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
     constructor(nombre,preguntas,lugar){
@@ -77,6 +77,8 @@ class conjuntoPreguntas {
         if (this.preguntasRepetidas(nuevaPregunta)){
 
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
+            const errorPreguntaRepetida = document.createElement("p");
+            errorPreguntaRepetida.innerHTML="la pregunta no puede estar vacia";
             this.lugar.parentNode.appendChild(errorPreguntaRepetida);
             setTimeout(()=> errorPreguntaRepetida.remove(),3000);
         }
@@ -201,12 +203,7 @@ function crearDivDeConjunto(nuevoConjunto){
     nuevoConjunto.crearDiv(nuevoConjunto.lugar);
 }
 function crearNuevoConjunto(nuevoConjunto){
-    // if(){
-
-    // } else {
         crearDivDeConjunto(nuevoConjunto);
-    // }
-
 }
 const mensajeErrorSinNombre = document.createElement("p");
 
@@ -255,24 +252,27 @@ botonAgregarNombre.addEventListener("click", ()=>{
         nombreCreado.innerText = "nombre elegido: "+ nombreDelConjunto;
         contenedorNombres.appendChild(nombreCreado);
     }
+    inputNombreConjunto.value = ""
 })
 
 botonGuardarConjuntos.addEventListener("click", ()=>{
+    mensajeConjuntosGuardados.innerText = "conjuntos guardados";
+    contenedorGuardarConjuntos.appendChild(mensajeConjuntosGuardados);
     localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
 })
 function cargarConjuntosGuardados(){
     let ConjuntosEnLocalStorage = JSON.parse(localStorage.getItem("conjuntosGuardados"))
     if(ConjuntosEnLocalStorage==[]){
-
     } else {
         for(i=0;i<ConjuntosEnLocalStorage.length;i++){
             crearNuevoObjeto(ConjuntosEnLocalStorage[i].nombre,ConjuntosEnLocalStorage[i].preguntas,ConjuntosEnLocalStorage[i].lugar);
         }
     }
-
 }
 cargarConjuntosGuardados()
 botonEliminarConjuntosGuardados.addEventListener("click", ()=>{
+    mensajeConjuntosGuardados.innerText ="conjuntos borrados";
+    contenedorGuardarConjuntos.appendChild(mensajeConjuntosGuardados);
     todosLosConjuntos=[]
     localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
 })
