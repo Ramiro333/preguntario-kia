@@ -1,4 +1,4 @@
-function nuevoerror(textoDelEeror,lugarDelError,timeout){
+function nuevoError(textoDelEeror,lugarDelError,timeout){
     nuevoP = document.createElement("p");
     nuevoP.innerText=textoDelEeror;
     nodoDestino = lugarDelError;
@@ -6,7 +6,6 @@ function nuevoerror(textoDelEeror,lugarDelError,timeout){
     if(timeout != undefined){
         setTimeout(()=> nuevoP.remove(),timeout);
     }
-    
 }
 let todosLosConjuntos = [];
 class conjuntoPreguntas {
@@ -54,10 +53,9 @@ class conjuntoPreguntas {
     }
     agregarPregunta(nuevaPregunta){
         if (this.preguntasRepetidas(nuevaPregunta)){
-
+            this.añadirMensajeError(nuevaPregunta,this.lugar);
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
-            nuevoerror("la pregunta no puede estar vacia",this.lugar.parentNode,3000)
-
+            nuevoError("la pregunta no puede estar vacia",this.lugar.parentNode,3000);
         }
         else {
             this.preguntas.push(nuevaPregunta);
@@ -67,11 +65,11 @@ class conjuntoPreguntas {
         pNuevoError.innerText ='"'+ preguntaRepetida+'"' + " ya esta usada";
         lugarNuevoError.parentNode.insertBefore(pNuevoError,lugarNuevoError);
         setTimeout(()=> pNuevoError.remove(),4000);
+        // !!!!!!!!!!!!!!!parentNode
     }
     preguntasRepetidas(preguntaACorroborar){
         for (let value of this.preguntas){
             if (value === preguntaACorroborar){
-                this.añadirMensajeError(preguntaACorroborar,this.lugar);
                 return true;
             }
         }

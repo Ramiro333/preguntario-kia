@@ -59,7 +59,7 @@ function agregarConjuntoPreguntasAmin(){
         if (contenedorBotonUsarPreguntasAdmin.children.length > 1) {
             contenedorBotonUsarPreguntasAdmin.children[1].remove();
         }
-        nuevoerror("preguntas admin ya esta siendo usado", contenedorBotonUsarPreguntasAdmin,4000)
+        nuevoError("preguntas admin ya esta siendo usado", contenedorBotonUsarPreguntasAdmin,4000)
     }
 }
 function validarNombreRepetido(nombreAValidar){
@@ -75,12 +75,12 @@ function validarNombreRepetido(nombreAValidar){
 botonCrearConjunto.addEventListener("click", ()=>{
     if(nombreDelConjunto===""||nombreDelConjunto===" "){
         //valido el nombre
-        nuevoerror("debes ponerle un nombre valido a tu conjunto",crearYNombrarConjunto,3000)
+        nuevoError("debes ponerle un nombre valido a tu conjunto",crearYNombrarConjunto,3000)
 
     } else if(validarNombreRepetido(nombreDelConjunto)) {
         crearNuevoObjeto(nombreDelConjunto,[],)
     } else{
-        nuevoerror(`ya existe un conjunto llamado ${nombreDelConjunto}`,crearYNombrarConjunto,3000)
+        nuevoError(`ya existe un conjunto llamado ${nombreDelConjunto}`,crearYNombrarConjunto,3000)
 
     }
 })
@@ -91,12 +91,12 @@ botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
     if(nombreDelConjunto==""||nombreDelConjunto==" "){
         //valido el nombre
-        nuevoerror("nombre no valido",contenedorNombres,3000)
+        nuevoError("nombre no valido",contenedorNombres,3000)
 
     }else {
         contenedorNombres.lastChild.remove();
         mensajeDelNombreDelConjunto = "nombre elegido: "+ inputNombreConjunto.value;
-        nuevoerror(mensajeDelNombreDelConjunto,contenedorNombres,)
+        nuevoError(mensajeDelNombreDelConjunto,contenedorNombres,)
         // contenedorNombres.appendChild(nombreCreado);
     }
     inputNombreConjunto.value = ""

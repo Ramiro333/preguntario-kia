@@ -1,8 +1,7 @@
 botonRandom.onclick = function(){
     //primero valido que haya suficientes preguntas
     if (conjuntoSeleccionado.preguntas.length < 2 ){
-        nuevoerror("debes elegir al menos 2 preguntas o utilizar un conjunto",preguntero,6000)
-
+        nuevoError("debes elegir al menos 2 preguntas o utilizar un conjunto",preguntero,6000);
         containerPreguntas.innerText = "";
     }
         else {
