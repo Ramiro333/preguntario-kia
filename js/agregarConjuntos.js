@@ -4,7 +4,14 @@ function agregarPreguntasAlConjunto(arrayAgregar){
     }
     conjuntoSeleccionado.crearDiv(primer);
 }
-function crearDivDeConjunto(nuevoConjunto){
+function crearBotonEliminarPreguntasDelConjuntoNuevo(){
+    const botonEliminarTodasLasPreguntasDelConjunto = document.createElement("button");
+    botonEliminarTodasLasPreguntasDelConjunto.addEventListener("click",()=>{
+        this.eliminarTodasLasPreguntas()
+    })
+    contenedorNuevo.appendChild(botonEliminarTodasLasPreguntasDelConjunto)
+}
+function crearNuevoConjunto(nuevoConjunto){
     const contenedorParaInput = document.createElement("div");
     const inputPlaceNuevoConjunto = document.createElement("input");
     const botonAgregarPreguntaNuevoConjunto = document.createElement("button");
@@ -26,6 +33,14 @@ function crearDivDeConjunto(nuevoConjunto){
         //uso la funcion para mostrarlas en el dom
         agregarPreguntasAlConjunto(nuevoConjunto);
     })
+    //creo el boton para eliminar todas las preguntas del conjunto
+    const botonEliminarTodasLasPreguntasDelConjunto = document.createElement("button");
+    botonEliminarTodasLasPreguntasDelConjunto.innerText = "eliminar todas las rpeguntas"
+    botonEliminarTodasLasPreguntasDelConjunto.addEventListener("click",()=>{
+        nuevoConjunto.eliminarTodasLasPreguntas()
+        nuevoConjunto.crearDiv(nuevoConjunto.lugar)
+    })
+    nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
     textoNuevo.innerHTML=nuevoConjunto.nombre;
     nombreDelConjuntoCreado.appendChild(textoNuevo);
     nombreDelConjuntoCreado.classList.add("contenedor-conjunto");
@@ -37,9 +52,7 @@ function crearDivDeConjunto(nuevoConjunto){
     nombreDelConjuntoCreado.appendChild(contenedorNuevo);
     nuevoConjunto.lugar=contenedorNuevo;
     nuevoConjunto.crearDiv(nuevoConjunto.lugar);
-}
-function crearNuevoConjunto(nuevoConjunto){
-        crearDivDeConjunto(nuevoConjunto);
+    nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
 }
 
 function crearNuevoObjeto(nombreDelConjunto,preguntasDelArray,lugarDelArray) {

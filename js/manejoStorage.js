@@ -32,5 +32,4 @@ botonEliminarConjuntosGuardados.addEventListener("click", ()=>{
             conjuntosJuntos.children[0].remove();
         }
     }
-    
 })
