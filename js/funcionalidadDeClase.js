@@ -53,9 +53,8 @@ class conjuntoPreguntas {
     }
     agregarPregunta(nuevaPregunta){
         if (this.preguntasRepetidas(nuevaPregunta)){
-            this.añadirMensajeError(nuevaPregunta,this.lugar);
+            this.añadirMensajeError(nuevaPregunta);
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
-            // nuevoError("la pregunta no puede estar vacia",this.lugar.parentNode,3000);
             Toastify({
                 text: "la pregunta no puede estar vacia",
                 duration: 2000,
@@ -66,11 +65,12 @@ class conjuntoPreguntas {
             this.preguntas.push(nuevaPregunta);
         }
     }
-    añadirMensajeError(preguntaRepetida,lugarNuevoError){
-        pNuevoError.innerText ='"'+ preguntaRepetida+'"' + " ya esta usada";
-        lugarNuevoError.parentNode.insertBefore(pNuevoError,lugarNuevoError);
-        setTimeout(()=> pNuevoError.remove(),4000);
-        // !!!!!!!!!!!!!!!parentNode
+    añadirMensajeError(preguntaRepetida){
+        Toastify({
+            text: `${preguntaRepetida} ya esta usada`,
+            duration: 2000,
+            close:true,
+        }).showToast()
     }
     preguntasRepetidas(preguntaACorroborar){
         for (let value of this.preguntas){

@@ -18,13 +18,14 @@ function cambiarText(){
 botonRandom.addEventListener("click",()=>{
         //primero valido que haya suficientes preguntas
         if (conjuntoSeleccionado.preguntas.length < 2 ){
-            // nuevoError("debes elegir al menos 2 preguntas o utilizar un conjunto",preguntero,6000);
-            Toastify({
-                text: "debes elegir al menos 2 preguntas o utilizar un conjunto",
-                duration: 6000,
-                close:true,
-            }).showToast()
-            containerPreguntas.innerText = "";
+            Swal.fire({
+                title: 'No tienes preguntas',
+                text: 'debes elegir al menos 2 preguntas o utilizar un conjunto',
+                icon: 'warning',
+                confirmButtonText: 'lo entiendo'
+            }).then(()=>{
+                containerPreguntas.innerText = "";
+            })
         } else {
             cambiarText()
         }

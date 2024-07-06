@@ -47,6 +47,15 @@ function crearNuevoConjunto(nuevoConjunto){
             nuevoConjunto.crearDiv(nuevoConjunto.lugar)  
         })
     })
+    //boton para eliminar el conjunto creado entero 
+    const botonEliminarConjuntoActual = document.createElement("button");
+    botonEliminarConjuntoActual.innerText = "eliminar el conjunto";
+    botonEliminarConjuntoActual.addEventListener("click",()=>{
+        let indexConjunto = todosLosConjuntos.indexOf(nuevoConjunto.nombre);
+        todosLosConjuntos.splice(indexConjunto,1);
+        nombreDelConjuntoCreado.remove()
+    })
+    nombreDelConjuntoCreado.appendChild(botonEliminarConjuntoActual)
     nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
     textoNuevo.innerHTML=nuevoConjunto.nombre;
     nombreDelConjuntoCreado.appendChild(textoNuevo);
@@ -79,7 +88,6 @@ function agregarConjuntoPreguntasAmin(){
         if (contenedorBotonUsarPreguntasAdmin.children.length > 1) {
             contenedorBotonUsarPreguntasAdmin.children[1].remove();
         }
-        // nuevoError("preguntas admin ya esta siendo usado", contenedorBotonUsarPreguntasAdmin,4000)
         Toastify({
             text: "preguntas admin ya esta siendo usado",
             duration: 4000,
@@ -100,7 +108,6 @@ function validarNombreRepetido(nombreAValidar){
 botonCrearConjunto.addEventListener("click", ()=>{
     if(nombreDelConjunto===""||nombreDelConjunto===" "){
         //valido el nombre
-        // nuevoError("debes ponerle un nombre valido a tu conjunto",crearYNombrarConjunto,3000)
         Toastify({
             text: "debes ponerle un nombre valido a tu conjunto",
             duration: 3000,
@@ -126,7 +133,6 @@ botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
     if(nombreDelConjunto==""||nombreDelConjunto==" "){
         //valido el nombre
-        // nuevoError("nombre no valido",contenedorNombres,3000)
         Toastify({
             text:"nombre no valido",
             duration: 3000,
