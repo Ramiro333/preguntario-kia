@@ -35,10 +35,17 @@ function crearNuevoConjunto(nuevoConjunto){
     })
     //creo el boton para eliminar todas las preguntas del conjunto
     const botonEliminarTodasLasPreguntasDelConjunto = document.createElement("button");
-    botonEliminarTodasLasPreguntasDelConjunto.innerText = "eliminar todas las rpeguntas"
+    botonEliminarTodasLasPreguntasDelConjunto.innerText = "eliminar todas las preguntas"
     botonEliminarTodasLasPreguntasDelConjunto.addEventListener("click",()=>{
-        nuevoConjunto.eliminarTodasLasPreguntas()
-        nuevoConjunto.crearDiv(nuevoConjunto.lugar)
+        Swal.fire({
+            title: 'seguro?',
+            text: `seguro que quieres eliminar todas las preguntas de ${nuevoConjunto.nombre}?`,
+            icon: 'question',
+            confirmButtonText: 'si!'
+        }).then(()=>{
+            nuevoConjunto.eliminarTodasLasPreguntas()
+            nuevoConjunto.crearDiv(nuevoConjunto.lugar)  
+        })
     })
     nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
     textoNuevo.innerHTML=nuevoConjunto.nombre;
@@ -72,7 +79,12 @@ function agregarConjuntoPreguntasAmin(){
         if (contenedorBotonUsarPreguntasAdmin.children.length > 1) {
             contenedorBotonUsarPreguntasAdmin.children[1].remove();
         }
-        nuevoError("preguntas admin ya esta siendo usado", contenedorBotonUsarPreguntasAdmin,4000)
+        // nuevoError("preguntas admin ya esta siendo usado", contenedorBotonUsarPreguntasAdmin,4000)
+        Toastify({
+            text: "preguntas admin ya esta siendo usado",
+            duration: 4000,
+            close:true,
+        }).showToast()
     }
 }
 function validarNombreRepetido(nombreAValidar){
@@ -88,12 +100,22 @@ function validarNombreRepetido(nombreAValidar){
 botonCrearConjunto.addEventListener("click", ()=>{
     if(nombreDelConjunto===""||nombreDelConjunto===" "){
         //valido el nombre
-        nuevoError("debes ponerle un nombre valido a tu conjunto",crearYNombrarConjunto,3000)
+        // nuevoError("debes ponerle un nombre valido a tu conjunto",crearYNombrarConjunto,3000)
+        Toastify({
+            text: "debes ponerle un nombre valido a tu conjunto",
+            duration: 3000,
+            close:true,
+        }).showToast()
 
     } else if(validarNombreRepetido(nombreDelConjunto)) {
         crearNuevoObjeto(nombreDelConjunto,[],)
     } else{
-        nuevoError(`ya existe un conjunto llamado ${nombreDelConjunto}`,crearYNombrarConjunto,3000)
+        // nuevoError(`ya existe un conjunto llamado ${nombreDelConjunto}`,crearYNombrarConjunto,3000)
+        Toastify({
+            text:`ya existe un conjunto llamado ${nombreDelConjunto}`,
+            duration: 3000,
+            close:true,
+        }).showToast()
 
     }
 })
@@ -104,7 +126,12 @@ botonAgregarNombre.addEventListener("click", ()=>{
     nombreDelConjunto = inputNombreConjunto.value;
     if(nombreDelConjunto==""||nombreDelConjunto==" "){
         //valido el nombre
-        nuevoError("nombre no valido",contenedorNombres,3000)
+        // nuevoError("nombre no valido",contenedorNombres,3000)
+        Toastify({
+            text:"nombre no valido",
+            duration: 3000,
+            close:true,
+        }).showToast()
 
     }else {
         contenedorNombres.lastChild.remove();

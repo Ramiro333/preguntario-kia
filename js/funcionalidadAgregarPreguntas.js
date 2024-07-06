@@ -18,7 +18,12 @@ function cambiarText(){
 botonRandom.addEventListener("click",()=>{
         //primero valido que haya suficientes preguntas
         if (conjuntoSeleccionado.preguntas.length < 2 ){
-            nuevoError("debes elegir al menos 2 preguntas o utilizar un conjunto",preguntero,6000);
+            // nuevoError("debes elegir al menos 2 preguntas o utilizar un conjunto",preguntero,6000);
+            Toastify({
+                text: "debes elegir al menos 2 preguntas o utilizar un conjunto",
+                duration: 6000,
+                close:true,
+            }).showToast()
             containerPreguntas.innerText = "";
         } else {
             cambiarText()
@@ -32,7 +37,14 @@ submit.onclick = function() {
     espacio.value = "";
 }
 botonEliminarTodo.addEventListener("click",()=>{
-    primer.innerHTML="";
-    conjuntoSeleccionado.eliminarTodasLasPreguntas();
-    conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
+    Swal.fire({
+        title: 'seguro?',
+        text: 'seguro que quieres eliminar toddas las preguntas?',
+        icon: 'question',
+        confirmButtonText: 'si!'
+    }).then(()=>{
+        primer.innerHTML="";
+        conjuntoSeleccionado.eliminarTodasLasPreguntas();
+        conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
+    })
 })

@@ -55,7 +55,12 @@ class conjuntoPreguntas {
         if (this.preguntasRepetidas(nuevaPregunta)){
             this.añadirMensajeError(nuevaPregunta,this.lugar);
         } else if(nuevaPregunta == "" || nuevaPregunta== " "){
-            nuevoError("la pregunta no puede estar vacia",this.lugar.parentNode,3000);
+            // nuevoError("la pregunta no puede estar vacia",this.lugar.parentNode,3000);
+            Toastify({
+                text: "la pregunta no puede estar vacia",
+                duration: 2000,
+                close:true,
+            }).showToast()
         }
         else {
             this.preguntas.push(nuevaPregunta);
