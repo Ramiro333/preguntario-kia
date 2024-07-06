@@ -1,6 +1,11 @@
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
+    Toastify({
+        text: "preguntas cargadas con exito :)",
+        duration: 4000,
+        close:true,
+    }).showToast()
 }
 botonCargar.addEventListener("click",()=>{
     localStorage.preguntasGuardadas.length>2 ? cargarPreguntasGuardadas() : Toastify({
