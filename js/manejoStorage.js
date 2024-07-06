@@ -37,7 +37,6 @@ function cargarConjuntosGuardados(){
 }
 cargarConjuntosGuardados()
 botonEliminarConjuntosGuardados.addEventListener("click", ()=>{
-    // nuevoError("conjuntos borrados",contenedorGuardarConjuntos,1000);
     Swal.fire({
         title: 'cuidado!',
         text: '¿seguro que quieres eliminar los conjuntos guardados?',
