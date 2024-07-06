@@ -51,9 +51,16 @@ function crearNuevoConjunto(nuevoConjunto){
     const botonEliminarConjuntoActual = document.createElement("button");
     botonEliminarConjuntoActual.innerText = "eliminar el conjunto";
     botonEliminarConjuntoActual.addEventListener("click",()=>{
+        Swal.fire({
+            title: 'seguro?',
+            text: `seguro que quieres eliminar todas las preguntas de ${nuevoConjunto.nombre}?`,
+            icon: 'question',
+            confirmButtonText: 'si!'
+        }).then(()=>{
         let indexConjunto = todosLosConjuntos.indexOf(nuevoConjunto.nombre);
         todosLosConjuntos.splice(indexConjunto,1);
         nombreDelConjuntoCreado.remove()
+        })
     })
     nombreDelConjuntoCreado.appendChild(botonEliminarConjuntoActual)
     nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);

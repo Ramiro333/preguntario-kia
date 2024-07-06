@@ -3,11 +3,14 @@ function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
 }
 botonCargar.addEventListener("click",()=>{
-    localStorage.preguntasGuardadas.length>2 ? cargarPreguntasGuardadas() : nuevoError("no hay preguntas guardadas",contenedorCargarGuardar, 3000);
+    localStorage.preguntasGuardadas.length>2 ? cargarPreguntasGuardadas() : Toastify({
+        text: "no hay preguntas guardas",
+        duration: 2500,
+        close:true,
+    }).showToast();
 })
 botonGuardar.addEventListener("click",()=>{
     conjuntoSeleccionado.agregarALocarStorage();
-    // nuevoError("preguntas guardadas :)",contenedorCargarGuardar,3000);
     Toastify({
         text: "preguntas guardadas :)",
         duration: 5000,
@@ -15,7 +18,6 @@ botonGuardar.addEventListener("click",()=>{
     }).showToast()
 })
 botonGuardarConjuntos.addEventListener("click", ()=>{
-    // nuevoError("conjuntos guardados",contenedorGuardarConjuntos,1000);
     Toastify({
         text: "conjuntos guardados",
         duration: 2500,
