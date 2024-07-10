@@ -88,8 +88,3 @@ class conjuntoPreguntas {
     }
 }
 let conjuntoSeleccionado = new conjuntoPreguntas("",[],primer);
-function cargarPreguntasGuardadas(){
-    conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
-    conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
-
-}

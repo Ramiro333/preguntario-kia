@@ -13,7 +13,7 @@ function cambiarText(){
         clearInterval(intervalo);
         contador=0
     }
-}, 200)
+}, 100)
 }
 botonRandom.addEventListener("click",()=>{
         //primero valido que haya suficientes preguntas

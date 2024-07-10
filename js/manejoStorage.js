@@ -1,3 +1,7 @@
+// function cargarPreguntasGuardadas(){
+//     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
+//     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
+// }
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
@@ -22,6 +26,11 @@ botonGuardar.addEventListener("click",()=>{
         close:true,
     }).showToast()
 })
+if(localStorage.preguntasGuardadas.length>2){
+    const preguntasEnLocalStorage = document.createElement("p");
+    preguntasEnLocalStorage.innerText = JSON.parse(localStorage.preguntasGuardadas).length+" preguntas guardadas";
+    contenedorCargarGuardar.append(preguntasEnLocalStorage)
+}
 botonGuardarConjuntos.addEventListener("click", ()=>{
     Toastify({
         text: "conjuntos guardados",
