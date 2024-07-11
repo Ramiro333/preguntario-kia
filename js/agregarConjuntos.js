@@ -124,7 +124,6 @@ botonCrearConjunto.addEventListener("click", ()=>{
     } else if(validarNombreRepetido(nombreDelConjunto)) {
         crearNuevoObjeto(nombreDelConjunto,[],)
     } else{
-        // nuevoError(`ya existe un conjunto llamado ${nombreDelConjunto}`,crearYNombrarConjunto,3000)
         Toastify({
             text:`ya existe un conjunto llamado ${nombreDelConjunto}`,
             duration: 3000,
@@ -150,7 +149,6 @@ botonAgregarNombre.addEventListener("click", ()=>{
         contenedorNombres.lastChild.remove();
         mensajeDelNombreDelConjunto = "nombre elegido: "+ inputNombreConjunto.value;
         nuevoError(mensajeDelNombreDelConjunto,contenedorNombres,)
-        // contenedorNombres.appendChild(nombreCreado);
     }
     inputNombreConjunto.value = ""
 })

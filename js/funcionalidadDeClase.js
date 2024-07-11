@@ -1,3 +1,5 @@
+//funcion que usaria cuando no tenia acceso a librerias, a quedado sin uso salvo una sola linea
+// que la usa (agregarConjuntos.js/ linea 151)
 function nuevoError(textoDelEeror,lugarDelError,timeout){
     nuevoP = document.createElement("p");
     nuevoP.innerText=textoDelEeror;
