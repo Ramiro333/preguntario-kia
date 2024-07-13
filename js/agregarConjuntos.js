@@ -14,9 +14,11 @@ function crearBotonEliminarPreguntasDelConjuntoNuevo(){
 function crearNuevoConjunto(nuevoConjunto){
     const contenedorParaInput = document.createElement("div");
     const inputPlaceNuevoConjunto = document.createElement("input");
+    inputPlaceNuevoConjunto.classList.add("input")
     const botonAgregarPreguntaNuevoConjunto = document.createElement("button");
     const contenedorNuevo = document.createElement("div");
     botonAgregarPreguntaNuevoConjunto.innerText = "agregar";
+    botonAgregarPreguntaNuevoConjunto.classList.add("button-18")
     botonAgregarPreguntaNuevoConjunto.addEventListener("click",()=>{
         let nuevaPreguntaConjuntoNuevo =  inputPlaceNuevoConjunto.value;
         nuevoConjunto.agregarPregunta(nuevaPreguntaConjuntoNuevo);
