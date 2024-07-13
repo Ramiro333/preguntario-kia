@@ -3,8 +3,10 @@
 function nuevoError(textoDelEeror,lugarDelError,timeout){
     nuevoP = document.createElement("p");
     nuevoP.innerText=textoDelEeror;
+    nuevoP.style.textAlign  ="center"
     nodoDestino = lugarDelError;
     nodoDestino.appendChild(nuevoP);
+    nuevoP.style.fontSize = "30px"
     if(timeout != undefined){
         setTimeout(()=> nuevoP.remove(),timeout);
     }
@@ -34,6 +36,7 @@ class conjuntoPreguntas {
             div.classList.add("divPreguntas");
             lugarAparicion.appendChild(div);
             const P = document.createElement("p");
+            P.classList.add("pregunta-agregada")
             P.innerText = contador + "-";
             P.innerText +=element;
             P.classList.add("nuevos");

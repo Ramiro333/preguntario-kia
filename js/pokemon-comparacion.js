@@ -2,6 +2,7 @@ function elegirNumeroRandom(){
     const GETRANDOM = Math.floor(Math.random() * 20);
     return GETRANDOM;
 }
+let todosLosPokemons= [];
 const contenedorImagenesPokemon = document.querySelector(".imagenes-pokemones");
 const pComparacion = document.querySelector(".texto-api");
 pComparacion.style.textAlign = "center ";
@@ -13,6 +14,7 @@ function getFetch(){
     .then(data => {
         let primerPokemon = data.results[elegirNumeroRandom()];
         let segundoPokemon = data.results[elegirNumeroRandom()];
+        todosLosPokemons = data.results
         //de esta forma realiza ambas solicitudes para los dos pokemons y espera a que se completen para seguir
         return Promise.all([
             fetch(primerPokemon.url).then(response => response.json()),
@@ -27,7 +29,6 @@ function getFetch(){
             //uso ls variables para plicarlas en el dom
             contenedorImagenesPokemon.innerHTML += `<img class= imagen-primer-pokemon src="${imgPrimerPokemon}" alt="">`
             contenedorImagenesPokemon.innerHTML += `<img class= imagen-primer-pokemon src="${imgSegundoPokemon}" alt="">`
-            console.log(primerPokemonData)
             //comparo las alturas y muestro el resultado en el dom
             if (segundoPokemonAltura > primerPokemonAltura) {
                 pComparacion.innerHTML = `<p>La altura de ${segundoPokemonData.name} es de: ${segundoPokemonAltura} y es mayor a la altura de ${primerPokemonData.name}</p>`

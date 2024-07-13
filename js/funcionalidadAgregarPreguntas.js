@@ -5,7 +5,7 @@ function cambiarText(){
     contador++;
     conjuntoSeleccionado.MostrarPregunta();
     if (contador < 8) {
-        containerPreguntas.style.color = "black";
+        containerPreguntas.style.color = "white";
     } else {
         containerPreguntas.style.color = "red";
     }

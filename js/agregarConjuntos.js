@@ -26,6 +26,7 @@ function crearNuevoConjunto(nuevoConjunto){
     })
     const nombreDelConjuntoCreado = document.createElement("div");
     const textoNuevo = document.createElement("p");
+    textoNuevo.classList.add("titulo-conjunto")
     const botonNuevo = document.createElement("button");
     botonNuevo.innerText = "USAR";
     botonNuevo.classList.add("button-19");
@@ -35,6 +36,7 @@ function crearNuevoConjunto(nuevoConjunto){
     })
     //creo el boton para eliminar todas las preguntas del conjunto
     const botonEliminarTodasLasPreguntasDelConjunto = document.createElement("button");
+    botonEliminarTodasLasPreguntasDelConjunto.classList.add("boton-eliminar-todas-preguntas-conjunto")
     botonEliminarTodasLasPreguntasDelConjunto.innerText = "eliminar todas las preguntas"
     botonEliminarTodasLasPreguntasDelConjunto.addEventListener("click",()=>{
         Swal.fire({
@@ -50,6 +52,7 @@ function crearNuevoConjunto(nuevoConjunto){
     //boton para eliminar el conjunto creado entero 
     const botonEliminarConjuntoActual = document.createElement("button");
     botonEliminarConjuntoActual.innerText = "eliminar el conjunto";
+    botonEliminarConjuntoActual.classList.add("eliminar-conjunto")
     botonEliminarConjuntoActual.addEventListener("click",()=>{
         Swal.fire({
             title: 'seguro?',
@@ -62,7 +65,6 @@ function crearNuevoConjunto(nuevoConjunto){
         nombreDelConjuntoCreado.remove()
         })
     })
-    nombreDelConjuntoCreado.appendChild(botonEliminarConjuntoActual)
     nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
     textoNuevo.innerHTML=nuevoConjunto.nombre;
     nombreDelConjuntoCreado.appendChild(textoNuevo);
@@ -76,6 +78,7 @@ function crearNuevoConjunto(nuevoConjunto){
     nuevoConjunto.lugar=contenedorNuevo;
     nuevoConjunto.crearDiv(nuevoConjunto.lugar);
     nombreDelConjuntoCreado.appendChild(botonEliminarTodasLasPreguntasDelConjunto);
+    nombreDelConjuntoCreado.appendChild(botonEliminarConjuntoActual)
 }
 
 function crearNuevoObjeto(nombreDelConjunto,preguntasDelArray,lugarDelArray) {
@@ -148,6 +151,7 @@ botonAgregarNombre.addEventListener("click", ()=>{
     }else {
         contenedorNombres.lastChild.remove();
         mensajeDelNombreDelConjunto = "nombre elegido: "+ inputNombreConjunto.value;
+
         nuevoError(mensajeDelNombreDelConjunto,contenedorNombres,)
     }
     inputNombreConjunto.value = ""

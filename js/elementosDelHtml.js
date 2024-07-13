@@ -1,4 +1,4 @@
-const botonRandom = document.querySelector(".button-19");
+const botonRandom = document.querySelector(".preguntar");
 const containerPreguntas = document.querySelector("#espacioPregunta");
 const primer = document.querySelector(".contenedorDePreguntas");
 const botonGuardar = document.querySelector(".boton-guardar");

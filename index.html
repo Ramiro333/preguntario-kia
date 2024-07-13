@@ -17,48 +17,53 @@
         </nav>
     </header>
     <main>
+        <div class="container">
+            <h1 class="titulo">Preguntario de intro a admin </h1>
+        </div>      
         <div class="container-principal preguntero">
-            <div class="container">
-                <h1>Preguntario de intro a admin </h1>
-            </div>
             <div class="container2">
-                <button class="button-19">preguntar</button>
+                <button class=" preguntar">preguntar</button>
                 <div class="pregunta">
                     <p id="espacioPregunta"></p>
                 </div>
             </div>
         </div>
-        <div class="container-principal segundo">
-            <div class="contenedor-input-preguntas-nuevas">
-                <label for="blank-space">pregunta nueva:</label>
-                <input type="text" id="blank-space">
-                <button class="button-19" id="submit">agregar</button>
-            </div>
+        <div class="segundo">
+            <h2 >Preguntas seleccionadas</h2>
             <div class="contenedorDePreguntas"></div>
             <button class="boton-eliminar-todo">eliminar todas las preguntas</button>
             <div class="espacio-error-repetido"></div>
         </div>
-        <div class="contedor-boton-usar-preguntas-admin">
-            <button class="button-19 boton-usar-preguntas-admin">Usar preguntas admin</button>
-        </div>
-        <div class="container-principal segundo conjuntos-juntos">
-        </div>
-        <div class="container-principal cargar-guardar">
-            <button class="boton-guardar button-19">guardar preguntas</button>
-            <button class="boton-cargar button-19">cargar preguntas</button>
-        </div>
-        <div class="container-principal crear-y-nombrar-conjunto">
-            <div class="contenedor-nombres">
-                <input type="text" id="blank-space-nombre-conjunto">
-                <button class="boton-agregar-nombre ">nombrar</button>
+        <div class="cargar-guardar">
+            <div class="contenedor-guardar-cargar">
+                <button class="boton-guardar botones">guardar preguntas</button>
+                <button class="boton-cargar botones">cargar preguntas</button>
             </div>
-            <button class="boton-crear-conjunto button-19">crear nuevo conjunto</button>
+        </div>
+        <div class=" contenedor-input-preguntas-nuevas">
+            <label for="blank-space">nueva pregunta:</label>
+            <input type="text" id="blank-space">
+            <button class="boton-agregar" id="submit">agregar</button>
+        </div>
+        <div class="contedor-boton-usar-preguntas-admin">
+            <button class="boton-usar-preguntas-admin">Usar preguntas admin</button>
+        </div>
+        <div class="conjuntos-juntos">
+        </div>
+        <div class="crear-y-nombrar-conjunto">
+            <div class="contenedor-nombres">
+                <div class="contenedor-input-boton">
+                    <input type="text" id="blank-space-nombre-conjunto">
+                    <button class="boton-agregar-nombre ">nombrar</button>
+                </div>
+            </div>
+            <button class="boton-crear-conjunto">crear nuevo conjunto</button>
             <div class="contenedor-nuevos-conjuntos"></div>
         </div>
-        <div class="container-principal contenedor-guardar-conjuntos">
+        <div class="contenedor-guardar-conjuntos">
             <div class="contendor-botones-guardar-conjuntos">
-                <button class="boton-guardar-conjuntos button-19">guardar conjuntos</button>
-                <button class="boton-eliminar-conjuntos-guardados button-19">eliminar conjuntos guardados</button>
+                <button class="boton-guardar-conjuntos botones cargar">guardar conjuntos</button>
+                <button class="boton-eliminar-conjuntos-guardados botones cargar">eliminar conjuntos guardados</button>
             </div>
         </div>
         <p style="text-align: center; margin-top: 20px;">buena suerte :-)</p>

@@ -1,4 +1,5 @@
 
+let ConjuntosEnLocalStorage = JSON.parse(localStorage.getItem("conjuntosGuardados"));
 function cargarPreguntasGuardadas(){
     conjuntoSeleccionado.preguntas = JSON.parse(localStorage.getItem("preguntasGuardadas"));
     conjuntoSeleccionado.crearDiv(conjuntoSeleccionado.lugar);
@@ -23,7 +24,7 @@ botonGuardar.addEventListener("click",()=>{
         close:true,
     }).showToast()
 })
-if(localStorage.preguntasGuardadas.length>2){
+if(localStorage.preguntasGuardadas?  localStorage.preguntasGuardadas.length>2 : console.log() ){
     const preguntasEnLocalStorage = document.createElement("p");
     preguntasEnLocalStorage.innerText = JSON.parse(localStorage.preguntasGuardadas).length+" preguntas guardadas";
     contenedorCargarGuardar.append(preguntasEnLocalStorage)
@@ -37,13 +38,8 @@ botonGuardarConjuntos.addEventListener("click", ()=>{
     localStorage.setItem("conjuntosGuardados",JSON.stringify(todosLosConjuntos));
 })
 function cargarConjuntosGuardados(){
-    let ConjuntosEnLocalStorage = JSON.parse(localStorage.getItem("conjuntosGuardados"));
-    if(ConjuntosEnLocalStorage==[]){
-        
-    } else {
-        for(i=0;i<ConjuntosEnLocalStorage.length;i++){
-            crearNuevoObjeto(ConjuntosEnLocalStorage[i].nombre,ConjuntosEnLocalStorage[i].preguntas,ConjuntosEnLocalStorage[i].lugar);
-        }
+    for(i=0;i<ConjuntosEnLocalStorage.length;i++){
+        crearNuevoObjeto(ConjuntosEnLocalStorage[i].nombre,ConjuntosEnLocalStorage[i].preguntas,ConjuntosEnLocalStorage[i].lugar);
     }
 }
 cargarConjuntosGuardados()
