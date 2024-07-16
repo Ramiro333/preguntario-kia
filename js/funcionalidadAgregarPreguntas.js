@@ -1,6 +1,8 @@
 let contador = 0
 function cambiarText(){
     //creo el intervalo y lo pongo en una variable para resetearlo
+    //desactivo el boton, si se activa muchas veces termina en un loop 
+    botonRandom.disabled = true;
     intervalo = setInterval(() => {
     contador++;
     conjuntoSeleccionado.MostrarPregunta();
@@ -12,6 +14,7 @@ function cambiarText(){
     if(contador===8){
         clearInterval(intervalo);
         contador=0
+        botonRandom.disabled = false;
     }
 }, 100)
 }
